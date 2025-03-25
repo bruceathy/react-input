@@ -1,8 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
+
+  const [didEdit, setDidEdit] = useState({
+    email: false,
+    password: false
+  });
 
   function handleSubmit(e) {
     const enteredEmail = email.current.value;
@@ -12,6 +17,14 @@ export default function Login() {
     console.log(enteredEmail, enteredPassword);
   }
 
+ function handdleInputBlur(identifier) {
+    setDidEdit({
+      ...didEdit,
+      [identifier]: true
+    });
+
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
@@ -19,7 +32,7 @@ export default function Login() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" ref={email} />
+          <input id="email" type="email" name="email" onBlur={} ref={email} />
         </div>
 
         <div className="control no-margin">
